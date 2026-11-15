@@ -7,7 +7,7 @@ import { useUser } from "../context/UserContext";
 import BottomBarPublic from "../components/BottomBarPublic";
 import { obtenerAtributos } from "../lib/atributos-db";
 import TransferenciaModal from "../components/TransferenciaModal";
-import { trackPurchase } from "../lib/analytics-db";
+import { trackPurchase, trackPurchaseGA } from "../lib/analytics-db";
 
 function resolveCartItemKey(item: any) {
   if (!item) return "";
@@ -182,6 +182,14 @@ export default function CartPage() {
     } catch (analyticsError) {
       console.error("[Cart] Error tracking WhatsApp purchase analytics:", analyticsError);
       // No fallar el proceso si falla el tracking
+    }
+
+    // Track purchase event in Google Analytics
+    try {
+      trackPurchaseGA("whatsapp", carrito, total);
+    } catch (gaError) {
+      console.error("[Cart] Error tracking WhatsApp purchase in GA:", gaError);
+      // No fallar el proceso si falla el tracking de GA
     }
 
     const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_PHONE || "0968517232";

@@ -11,6 +11,70 @@ import {
 } from "firebase/firestore";
 import { getOrCreateDeviceId } from "./device-id-client";
 
+/**
+ * 📊 GOOGLE ANALYTICS 4 EVENT TRACKING
+ * Sends events to Google Analytics using gtag()
+ */
+
+/**
+ * Send an event to Google Analytics
+ */
+function sendGAEvent(eventName: string, parameters?: Record<string, any>): void {
+  if (typeof window !== "undefined" && (window as any).gtag) {
+    console.log("[GA4] Sending event:", eventName, parameters);
+    (window as any).gtag("event", eventName, parameters);
+  } else {
+    console.warn("[GA4] gtag not available, event not sent:", eventName);
+  }
+}
+
+/**
+ * Track add_to_cart event in Google Analytics
+ * @param product - Product data with id, name, price, category, etc.
+ * @param quantity - Quantity added to cart
+ */
+export function trackAddToCartGA(product: any, quantity: number = 1): void {
+  const item = {
+    item_id: product.id,
+    item_name: product.nombre,
+    price: product.precioUnitario || product.precio || product.finalPrice || 0,
+    quantity: quantity,
+    ...(product.categoria && { item_category: product.categoria }),
+    ...(product.slug && { item_variant: product.slug }),
+  };
+
+  sendGAEvent("add_to_cart", {
+    currency: "USD",
+    value: (product.precioUnitario || product.precio || product.finalPrice || 0) * quantity,
+    items: [item],
+  });
+}
+
+/**
+ * Track purchase event in Google Analytics
+ * @param metodoPago - Payment method: "whatsapp" or "transferencia"
+ * @param carrito - Array of products in cart
+ * @param total - Total purchase amount
+ */
+export function trackPurchaseGA(metodoPago: "whatsapp" | "transferencia", carrito: any[], total: number): void {
+  const items = carrito.map((product) => ({
+    item_id: product.id,
+    item_name: product.nombre,
+    price: product.precioUnitario || product.precio || product.finalPrice || 0,
+    quantity: product.cantidad || 1,
+    ...(product.categoria && { item_category: product.categoria }),
+    ...(product.slug && { item_variant: product.slug }),
+  }));
+
+  sendGAEvent("purchase", {
+    transaction_id: `TXN-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+    currency: "USD",
+    value: total,
+    payment_method: metodoPago,
+    items: items,
+  });
+}
+
 const ANALYTICS_COLLECTION = "analytics";
 const API_TRACK_URL = "/api/analytics/track";
 

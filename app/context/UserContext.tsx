@@ -4,6 +4,7 @@ import { getInitialFavorites, getInitialCart, saveFavorites, saveCart, mergeGues
 import { auth } from "../lib/firebase";
 import { onIdTokenChanged, getIdToken, getIdTokenResult } from "firebase/auth";
 import { Loading3DIcon } from "../components/Loading3DIcon";
+import { trackAddToCartGA } from "../lib/analytics-db";
 
 
 
@@ -202,6 +203,12 @@ export function UserProvider({ children }: { children: ReactNode }) {
           getCartItemKey(p) === nextKey ? { ...p, ...producto, cantidad: producto.cantidad || 1 } : p
         );
         return updated;
+      }
+      // Track add_to_cart event in Google Analytics
+      try {
+        trackAddToCartGA(producto, producto.cantidad || 1);
+      } catch (error) {
+        console.error("[UserContext] Error tracking add_to_cart:", error);
       }
       return [...prev, { ...producto, cantidad: producto.cantidad || 1 }];
     });

@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { getSnapshotPricing } from "../lib/pricing";
+import { trackPurchase, trackPurchaseGA } from "../lib/analytics-db";
 
 interface TransferenciaModalProps {
   carrito: any[];
@@ -180,6 +181,22 @@ export default function TransferenciaModal({
       }
 
       const ordenData = await ordenRes.json();
+
+      // Track purchase analytics for transferencia
+      try {
+        await trackPurchase("transferencia");
+      } catch (analyticsError) {
+        console.error("[TransferenciaModal] Error tracking transferencia purchase analytics:", analyticsError);
+        // No fallar el proceso si falla el tracking
+      }
+
+      // Track purchase event in Google Analytics
+      try {
+        trackPurchaseGA("transferencia", carrito, totalConEnvio);
+      } catch (gaError) {
+        console.error("[TransferenciaModal] Error tracking transferencia purchase in GA:", gaError);
+        // No fallar el proceso si falla el tracking de GA
+      }
 
       alert(
         "✅ Orden creada exitosamente. Hemos enviado un correo con los detalles de tu compra."
