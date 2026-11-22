@@ -19,7 +19,7 @@ const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ||
   "https://imwec.com";
 
-const SITE_NAME = "IMW - In My Wardrobe";
+const SITE_NAME = "MILLY STORE";
 
 const barlowCondensed = Barlow_Condensed({
   subsets: ["latin"],
@@ -47,31 +47,29 @@ const themeInitScript = `
 
 export const metadata: Metadata = {
   title: {
-    default: "IMW - In My Wardrobe | Perfumes originales importados desde USA",
-    template: "%s | IMW",
+    default: "MILLY STORE | Moda europea para mujeres, hombres y niños",
+    template: "%s | MILLY STORE",
   },
 
   description:
-    "Comprar perfumes originales importados desde USA al mejor precio. Marcas como Guess, Rasasi, Paris Corner, Ariana Grande y más. Envíos a todo Ecuador por Servientrega. Productos 100% originales garantizados. Decants de perfumes premium a precios accesibles.",
+    "Tienda online de ropa y moda europea para mujeres, hombres y niños. Envíos inmediatos a todo Ecuador. Encuentra las últimas tendencias de moda en Cariamanga, Loja. Ropa de calidad con entrega rápida.",
 
   keywords: [
-    "Perfumes originales",
-    "Perfumes importados",
-    "Perfumes USA",
-    "Tienda de perfumes online",
-    "Perfumes Ecuador",
+    "Tienda de ropa online",
+    "Moda europea",
+    "Ropa para mujer",
+    "Ropa para hombre",
+    "Ropa para niños",
+    "Tienda de ropa Ecuador",
     "Envíos a todo Ecuador",
-    "Decants de perfume",
-    "Perfumes Guess",
-    "Perfumes Rasasi",
-    "Perfumes Paris Corner",
-    "Perfumes Ariana Grande",
-    "Perfumes originales baratos",
-    "Comprar perfumes online",
-    "Perfumes de marca",
-    "Perfumes premium",
-    "Perfumes importados a Ecuador",
-    "Servientrega perfumes",
+    "Moda online",
+    "Ropa de marca",
+    "Comprar ropa online",
+    "Fashion Ecuador",
+    "Ropa trendy",
+    "Envíos inmediatos",
+    "Cariamanga Loja",
+    "Milly Store",
   ],
 
   creator: SITE_NAME,
@@ -94,17 +92,17 @@ export const metadata: Metadata = {
     url: SITE_URL,
     siteName: SITE_NAME,
 
-    title: "IMW - In My Wardrobe | Perfumes originales importados desde USA",
+    title: "MILLY STORE | Moda europea para mujeres, hombres y niños",
 
     description:
-      "Comprar perfumes originales importados desde USA al mejor precio. Marcas como Guess, Rasasi, Paris Corner, Ariana Grande y más. Envíos a todo Ecuador por Servientrega. Productos 100% originales garantizados.",
+      "Tienda online de ropa y moda europea para mujeres, hombres y niños. Envíos inmediatos a todo Ecuador. Encuentra las últimas tendencias de moda en Cariamanga, Loja.",
 
     images: [
       {
         url: `${SITE_URL}/og-image.jpg`,
         width: 1200,
         height: 630,
-        alt: "IMW - In My Wardrobe - Perfumes originales importados",
+        alt: "MILLY STORE - Moda europea online",
       },
     ],
   },
@@ -112,10 +110,10 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
 
-    title: "IMW - In My Wardrobe | Perfumes originales importados desde USA",
+    title: "MILLY STORE | Moda europea para mujeres, hombres y niños",
 
     description:
-      "Comprar perfumes originales importados desde USA al mejor precio. Marcas como Guess, Rasasi, Paris Corner, Ariana Grande y más. Envíos a todo Ecuador por Servientrega.",
+      "Tienda online de ropa y moda europea para mujeres, hombres y niños. Envíos inmediatos a todo Ecuador.",
 
     images: [`${SITE_URL}/twitter-image.jpg`],
   },
@@ -147,7 +145,7 @@ export const metadata: Metadata = {
     title: SITE_NAME,
   },
 
-  category: "Tienda de perfumes",
+  category: "Tienda de ropa",
 };
 
 export const viewport: Viewport = {

@@ -74,11 +74,11 @@ const IconTruck = () => (
 
 /* ---------------- Datos del negocio ---------------- */
 
-const WHATSAPP_NUMBER = "593968514889"; // solo números, con código de país, sin '+' ni espacios
-const WHATSAPP_DISPLAY = "0968514889"; // como se muestra al usuario
-const INSTAGRAM_URL = "https://www.instagram.com/imw_ec/";
-const FACEBOOK_URL = "https://www.facebook.com/imwec/";
-const TIKTOK_URL = "https://www.tiktok.com/@imw2026";
+const WHATSAPP_NUMBER = "593985850543"; // solo números, con código de país, sin '+' ni espacios
+const WHATSAPP_DISPLAY = "0985850543"; // como se muestra al usuario
+const INSTAGRAM_URL = "https://www.instagram.com/milly.store_ec/";
+const FACEBOOK_URL = "https://www.facebook.com/milly.store.ec/";
+const TIKTOK_URL = "https://www.tiktok.com/@milly.store_ec";
 const DEV_INSTAGRAM_URL = "https://www.instagram.com/hector.cobena/";
 
 const socialLinks = [
@@ -100,9 +100,9 @@ const policyLinks = [
 ];
 
 const trustItems = [
-  { Icon: IconShield, title: "Perfumes originales", text: "Autenticidad garantizada" },
-  { Icon: IconPlane, title: "Importados desde USA", text: "Directo a Ecuador" },
-  { Icon: IconTruck, title: "Envíos por Servientrega", text: "A todo el país" },
+  { Icon: IconShield, title: "Ropa de calidad", text: "Moda europea original" },
+  { Icon: IconPlane, title: "Moda europea", text: "Últimas tendencias" },
+  { Icon: IconTruck, title: "Envíos inmediatos", text: "A todo Ecuador" },
   { Icon: () => <IconWhatsApp size={22} />, title: "Atención por WhatsApp", text: "Te asesoramos al instante" },
 ];
 
@@ -152,12 +152,12 @@ const Footer: React.FC = () => {
             {/* Marca */}
             <div className={styles.ftIntro}>
               <h2 className={styles.ftBrand}>
-                IMW
-                <span className={styles.ftBrandSub}>In My Wardrobe</span>
+                MILLY
+                <span className={styles.ftBrandSub}>STORE</span>
               </h2>
               <p className={styles.ftIntroText}>
-                Perfumes originales importados desde USA, con envío seguro a todo
-                Ecuador. Encuentra tu fragancia ideal sin salir de casa.
+                Moda europea para mujeres, hombres y niños. Envíos inmediatos a todo
+                Ecuador. Encuentra las últimas tendencias de moda sin salir de casa.
               </p>
 
               <a
@@ -253,7 +253,7 @@ const Footer: React.FC = () => {
           {/* Copyright + créditos */}
           <div className={styles.ftCopyRow}>
             <p className={styles.ftCopyText}>
-              © {new Date().getFullYear()} IMW - In My Wardrobe. Todos los derechos reservados.
+              © {new Date().getFullYear()} MILLY STORE. Todos los derechos reservados.
             </p>
             <div className={styles.ftCopyRight}>
               <div className={styles.ftBadge}>
@@ -278,7 +278,7 @@ const Footer: React.FC = () => {
       {showWhatsAppFloating && (
         <WhatsAppFloatingButton
           phoneNumber={WHATSAPP_NUMBER}
-          message="Hola, quiero información sobre IMW - In My Wardrobe"
+          message="Hola, quiero información sobre MILLY STORE"
         />
       )}
     </>

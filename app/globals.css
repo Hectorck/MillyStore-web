@@ -3,47 +3,72 @@
 
 :root {
   /* ============================================================
-     PALETA DE COLORES — IMW (In My Wardrobe)
-     Negro Medianoche  #0B0D12  (fondo dark)
-     Azul Abismo       #1B2430  (superficies dark)
-     Gris Platino      #C0C1C4  (texto secundario dark)
-     Blanco Puro       #FFFFFF  (fondo light / texto dark)
-     Dorado Antiguo    #D4A933  (CTA y detalles de marca)
+     PALETA DE COLORES — MILLY STORE
+     Opción A (ACTIVA) · Burdeos & Crema  → fiel al logo, elegante y sobrio
+     Para cambiar de opción: reemplaza SOLO los valores de este bloque
+     por los de la opción B o C (más abajo, comentadas).
      ============================================================ */
 
-  /* --- Colores base de la paleta --- */
-  --color-negro: #0b0d12;
-  --color-azul: #1b2430;
-  --color-platino: #c0c1c4;
-  --color-blanco: #ffffff;
-  --color-dorado: #d4a933;
+  /* --- Burdeos (base dark) --- */
+  --color-vino: #2a0507;            /* fondo dark */
+  --color-vino-deep: #1c0305;       /* footer dark */
+  --color-burdeos: #400709;         /* superficies dark (el burdeos del logo) */
+  --color-burdeos-light: #531219;   /* hover / superficies elevadas */
+  --color-burdeos-border: #6b2830;  /* bordes en dark */
 
-  /* --- Variantes derivadas --- */
-  --color-azul-light: #25303f;      /* azul abismo aclarado, hover/superficies elevadas */
-  --color-azul-border: #2c3747;     /* bordes en dark */
-  --color-dorado-dark: #b8912a;     /* hover en botones dorados */
-  --color-dorado-text: #8a6a12;     /* dorado legible como texto sobre blanco */
-  --color-negro-deep: #07090d;      /* footer dark, más profundo que el fondo */
-  --color-gris-claro: #f1f2f4;      /* superficies light (derivado de platino) */
-  --color-gris-border: #d9dadd;     /* bordes en light */
-  --color-slate-text: #475264;      /* texto secundario light */
+  /* --- Crema (base light + texto dark) --- */
+  --color-crema: #f6ebe0;           /* texto principal en dark (el crema del logo) */
+  --color-crema-claro: #faf4ee;     /* fondo light */
+  --color-crema-surface: #f1e3d6;   /* superficies light */
+  --color-crema-border: #e2cfc0;    /* bordes en light */
+  --color-taupe: #d4bfb0;           /* texto secundario dark */
+  --color-cacao: #6b4a47;           /* texto secundario light */
+
+  /* --- Botones / CTA --- */
+  --color-cta-dark: #f6ebe0;        /* botón principal en dark (crema) */
+  --color-cta-dark-hover: #e6d2bd;
+  --color-cta-light: #5a0a12;       /* botón principal en light (burdeos) */
+  --color-cta-light-hover: #440409;
+
+  /* --- Acentos / detalles --- */
+  --color-accent-dark: #d9b08c;     /* champagne rosado sobre fondo dark */
+  --color-accent-light: #8c2f39;    /* vino rojizo legible sobre crema */
+
+  /* ------------------------------------------------------------
+     OPCIÓN B · Burdeos & Oro champagne (más lujo / joyería)
+     --color-cta-dark: #cfae70;
+     --color-cta-dark-hover: #b8975a;
+     --color-accent-dark: #cfae70;
+     --color-accent-light: #8a6a2f;
+     ------------------------------------------------------------
+     OPCIÓN C · Burdeos & Rosa empolvado (más femenino / suave)
+     --color-crema-claro: #fff7f5;
+     --color-crema-surface: #f7e6e3;
+     --color-crema-border: #ebd3cf;
+     --color-cta-dark: #e8b9b5;
+     --color-cta-dark-hover: #d69f9b;
+     --color-cta-light: #6b0f1a;
+     --color-cta-light-hover: #520911;
+     --color-accent-dark: #e8b9b5;
+     --color-accent-light: #a33b4a;
+     ------------------------------------------------------------ */
 
   /* --- Tipografía --- */
-  --font-body-family: var(--font-barlow-condensed), "Barlow Condensed", sans-serif;
+  --font-body-family: var(--font-montserrat), "Montserrat", sans-serif;
   --font-body-style: normal;
   --font-body-weight: 400;
-  --font-body-weight-bold: 700;
+  --font-body-weight-bold: 600;
 
-  --font-heading-family: var(--font-barlow-condensed), "Barlow Condensed", sans-serif;
+  --font-heading-family: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
   --font-heading-style: normal;
-  --font-heading-weight: 700;
+  --font-heading-weight: 600;
 
   --font-body-scale: 1.0;
   --font-heading-scale: 1.15;
 
   /* --- Tipografía del navbar --- */
-  --font-navbar-body-family: var(--font-barlow-condensed), "Barlow Condensed", sans-serif;
-  --font-navbar-heading-family: var(--font-barlow-condensed), "Barlow Condensed", sans-serif;
+  --font-navbar-body-family: var(--font-montserrat), "Montserrat", sans-serif;
+  --font-navbar-heading-family: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
 }
 
 /* --- Tema Oscuro (por defecto) --- */
@@ -52,48 +77,48 @@
   color-scheme: dark;
 
   /* --- Semántica --- */
-  --background: var(--color-negro);
-  --foreground: var(--color-blanco);
+  --background: var(--color-vino);
+  --foreground: var(--color-crema);
 
-  --bg: var(--color-negro);
-  --bgSecondary: var(--color-azul);
+  --bg: var(--color-vino);
+  --bgSecondary: var(--color-burdeos);
 
-  --text: var(--color-blanco);
-  --textSecondary: var(--color-platino);
+  --text: var(--color-crema);
+  --textSecondary: var(--color-taupe);
 
-  --border: var(--color-azul-border);
+  --border: var(--color-burdeos-border);
 
-  --cardBg: var(--color-azul);
+  --cardBg: var(--color-burdeos);
 
   /* --- Colores de marca / acción --- */
-  --primary: var(--color-dorado);
-  --primaryHover: var(--color-dorado-dark);
-  --primaryForeground: var(--color-negro);
+  --primary: var(--color-cta-dark);
+  --primaryHover: var(--color-cta-dark-hover);
+  --primaryForeground: var(--color-vino);
 
-  --secondary: var(--color-azul);
-  --secondaryHover: var(--color-azul-light);
-  --secondaryForeground: var(--color-blanco);
+  --secondary: var(--color-burdeos);
+  --secondaryHover: var(--color-burdeos-light);
+  --secondaryForeground: var(--color-crema);
 
-  --accent: var(--color-dorado);
-  --accentForeground: var(--color-negro);
+  --accent: var(--color-accent-dark);
+  --accentForeground: var(--color-vino);
 
-  --muted: var(--color-azul);
-  --mutedForeground: var(--color-platino);
+  --muted: var(--color-burdeos);
+  --mutedForeground: var(--color-taupe);
 
-  --card: var(--color-azul);
-  --cardForeground: var(--color-blanco);
+  --card: var(--color-burdeos);
+  --cardForeground: var(--color-crema);
 
-  --galleryImgBg: var(--color-azul);
+  --galleryImgBg: var(--color-burdeos);
 
   /* --- Navbar / Footer --- */
-  --navbarBg: rgba(11, 13, 18, 0.85);
-  --navbarBgHover: var(--color-azul);
-  --navbarText: var(--color-blanco);
-  --navbarTextMuted: var(--color-dorado);
+  --navbarBg: rgba(42, 5, 7, 0.85);
+  --navbarBgHover: var(--color-burdeos);
+  --navbarText: var(--color-crema);
+  --navbarTextMuted: var(--color-accent-dark);
 
-  --footerBg: var(--color-negro-deep);
-  --footerText: var(--color-blanco);
-  --footerTextMuted: var(--color-platino);
+  --footerBg: var(--color-vino-deep);
+  --footerText: var(--color-crema);
+  --footerTextMuted: var(--color-taupe);
 }
 
 /* --- Tema Claro ---
@@ -103,48 +128,48 @@
   color-scheme: light;
 
   /* --- Semántica --- */
-  --background: var(--color-blanco) !important;
-  --foreground: var(--color-negro) !important;
+  --background: var(--color-crema-claro) !important;
+  --foreground: var(--color-vino) !important;
 
-  --bg: var(--color-blanco) !important;
-  --bgSecondary: var(--color-gris-claro) !important;
+  --bg: var(--color-crema-claro) !important;
+  --bgSecondary: var(--color-crema-surface) !important;
 
-  --text: var(--color-negro) !important;
-  --textSecondary: var(--color-slate-text) !important;
+  --text: var(--color-vino) !important;
+  --textSecondary: var(--color-cacao) !important;
 
-  --border: var(--color-gris-border) !important;
+  --border: var(--color-crema-border) !important;
 
-  --cardBg: var(--color-blanco) !important;
+  --cardBg: #ffffff !important;
 
   /* --- Colores de marca / acción --- */
-  --primary: var(--color-dorado) !important;
-  --primaryHover: var(--color-dorado-dark) !important;
-  --primaryForeground: var(--color-negro) !important;
+  --primary: var(--color-cta-light) !important;
+  --primaryHover: var(--color-cta-light-hover) !important;
+  --primaryForeground: var(--color-crema) !important;
 
-  --secondary: var(--color-azul) !important;
-  --secondaryHover: var(--color-azul-light) !important;
-  --secondaryForeground: var(--color-blanco) !important;
+  --secondary: var(--color-burdeos) !important;
+  --secondaryHover: var(--color-burdeos-light) !important;
+  --secondaryForeground: var(--color-crema) !important;
 
-  --accent: var(--color-dorado-text) !important;
-  --accentForeground: var(--color-blanco) !important;
+  --accent: var(--color-accent-light) !important;
+  --accentForeground: var(--color-crema) !important;
 
-  --muted: var(--color-gris-claro) !important;
-  --mutedForeground: var(--color-slate-text) !important;
+  --muted: var(--color-crema-surface) !important;
+  --mutedForeground: var(--color-cacao) !important;
 
-  --card: var(--color-blanco) !important;
-  --cardForeground: var(--color-negro) !important;
+  --card: #ffffff !important;
+  --cardForeground: var(--color-vino) !important;
 
-  --galleryImgBg: var(--color-gris-claro) !important;
+  --galleryImgBg: var(--color-crema-surface) !important;
 
   /* --- Navbar / Footer --- */
-  --navbarBg: rgba(255, 255, 255, 0.85) !important;
-  --navbarBgHover: rgba(255, 255, 255, 0.95) !important;
-  --navbarText: var(--color-negro) !important;
-  --navbarTextMuted: var(--color-dorado-text) !important;
+  --navbarBg: rgba(250, 244, 238, 0.85) !important;
+  --navbarBgHover: rgba(250, 244, 238, 0.95) !important;
+  --navbarText: var(--color-vino) !important;
+  --navbarTextMuted: var(--color-accent-light) !important;
 
-  --footerBg: var(--color-gris-claro) !important;
-  --footerText: var(--color-negro) !important;
-  --footerTextMuted: var(--color-slate-text) !important;
+  --footerBg: var(--color-crema-surface) !important;
+  --footerText: var(--color-vino) !important;
+  --footerTextMuted: var(--color-cacao) !important;
 }
 
 @theme inline {
