@@ -1,18 +1,13 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
 import { themeManager } from "./themeManager";
 
-/* Logo según el tema (ajusta los nombres si tus archivos se llaman distinto) */
-const LOGO_LIGHT = "/imw_light.png"; // se muestra con el tema claro
-const LOGO_DARK = "/imw-dark.png"; // se muestra con el tema oscuro
-
 /**
- * Loading de marca.
- * - Autocontenido: los keyframes viven en este archivo, ya no dependen de
- *   balde-spin / balde-shadow / animate-loadingSteps del CSS global.
- * - Se adapta al tema con --text, --textSecondary y --accent (con fallbacks).
+ * Loading de marca — MILLY STORE.
+ * - Sin imágenes: wordmark en texto con brillo que recorre las letras.
+ * - Tema claro → vinotinto. Tema oscuro → blanco.
+ * - Autocontenido: los keyframes viven en este archivo.
  * - Respeta prefers-reduced-motion.
  */
 export function Loading3DIcon() {
@@ -25,239 +20,213 @@ export function Loading3DIcon() {
     return () => window.removeEventListener("theme-changed", checkTheme);
   }, []);
 
-  const logoSrc = theme === "light" ? LOGO_LIGHT : LOGO_DARK;
+  const isLight = theme === "light";
+
+  const colors = {
+    "--mlyl-color": isLight ? "#5a0a12" : "#ffffff",
+    "--mlyl-shine": isLight ? "#c0525e" : "rgba(255, 255, 255, 0.28)",
+    "--mlyl-muted": isLight ? "#6b4a47" : "rgba(255, 255, 255, 0.72)",
+  } as React.CSSProperties;
 
   return (
     <div
-      className="imwl-root"
+      className="mlyl-root"
+      style={colors}
       role="status"
       aria-live="polite"
       aria-busy="true"
     >
-      <div className="imwl-stage">
+      <div className="mlyl-stage">
         {/* Resplandor de fondo */}
-        <div className="imwl-glow" aria-hidden="true" />
+        <div className="mlyl-glow" aria-hidden="true" />
 
-        {/* Anillo base */}
-        <div className="imwl-ring-base" aria-hidden="true" />
+        {/* Wordmark */}
+        <h2 className="mlyl-word" aria-hidden="true">MILLY</h2>
 
-        {/* Anillo animado con degradado */}
-        <div className="imwl-ring-spin" aria-hidden="true" />
-
-        {/* Anillo interior que gira al revés */}
-        <div className="imwl-ring-inner" aria-hidden="true" />
-
-        {/* Logo flotando con giro 3D suave */}
-        <div className="imwl-logo">
-          <Image
-            src={logoSrc}
-            alt="IMW - In My Wardrobe"
-            fill
-            sizes="96px"
-            className="imwl-logo-img"
-            priority
-          />
+        {/* STORE con líneas laterales (guiño al logo) */}
+        <div className="mlyl-sub" aria-hidden="true">
+          <span className="mlyl-line mlyl-line-l" />
+          <span className="mlyl-store">STORE</span>
+          <span className="mlyl-line mlyl-line-r" />
         </div>
-
-        {/* Sombra de contacto que respira con la flotación */}
-        <div className="imwl-shadow" aria-hidden="true" />
       </div>
 
-      {/* Texto */}
-      <div className="imwl-copy">
-        <span className="imwl-brand">IMW</span>
-        <span className="imwl-label">Cargando</span>
-        <div className="imwl-bar" aria-hidden="true">
-          <span className="imwl-bar-fill" />
-        </div>
+      {/* Texto de carga */}
+      <p className="mlyl-label">
+        Cargando productos de MillyStore
+        <span className="mlyl-dots" aria-hidden="true">
+          <span>.</span>
+          <span>.</span>
+          <span>.</span>
+        </span>
+      </p>
+
+      {/* Barra de progreso indeterminada */}
+      <div className="mlyl-bar" aria-hidden="true">
+        <span className="mlyl-bar-fill" />
       </div>
 
       <style>{`
-        .imwl-root {
-          --imwl-text: var(--text, #111111);
-          --imwl-muted: var(--textSecondary, #6b7280);
-          --imwl-accent: var(--accent, #d9b97a);
+        .mlyl-root {
           display: flex;
           flex-direction: column;
           align-items: center;
           justify-content: center;
-          padding: 40px 0;
+          padding: 48px 16px;
           user-select: none;
         }
 
-        .imwl-stage {
+        .mlyl-stage {
           position: relative;
-          width: 176px;
-          height: 176px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          perspective: 900px;
-        }
-
-        /* ---------- Glow ---------- */
-        .imwl-glow {
-          position: absolute;
-          inset: 14px;
-          border-radius: 50%;
-          background: radial-gradient(
-            circle,
-            color-mix(in srgb, var(--imwl-accent) 38%, transparent) 0%,
-            transparent 70%
-          );
-          filter: blur(22px);
-          animation: imwl-breathe 3s ease-in-out infinite;
-        }
-
-        /* ---------- Anillos ---------- */
-        .imwl-ring-base {
-          position: absolute;
-          inset: 8px;
-          border-radius: 50%;
-          border: 1px solid color-mix(in srgb, var(--imwl-text) 14%, transparent);
-        }
-
-        .imwl-ring-spin,
-        .imwl-ring-inner {
-          position: absolute;
-          border-radius: 50%;
-          -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 3px));
-                  mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 3px));
-        }
-
-        .imwl-ring-spin {
-          inset: 8px;
-          background: conic-gradient(
-            from 0deg,
-            transparent 0deg,
-            transparent 150deg,
-            var(--imwl-accent) 340deg,
-            var(--imwl-text) 360deg
-          );
-          animation: imwl-spin 2.4s linear infinite;
-        }
-
-        .imwl-ring-inner {
-          inset: 22px;
-          opacity: 0.55;
-          -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 2px));
-                  mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 2px));
-          background: conic-gradient(
-            from 180deg,
-            transparent 0deg,
-            transparent 220deg,
-            var(--imwl-accent) 360deg
-          );
-          animation: imwl-spin 4.2s linear infinite reverse;
-        }
-
-        /* ---------- Logo ---------- */
-        .imwl-logo {
-          position: relative;
-          width: 96px;
-          height: 96px;
-          transform-style: preserve-3d;
-          animation: imwl-float 3.2s ease-in-out infinite;
-        }
-
-        .imwl-logo-img {
-          object-fit: contain;
-          filter: drop-shadow(0 14px 16px rgba(0, 0, 0, 0.28));
-        }
-
-        .imwl-shadow {
-          position: absolute;
-          bottom: 4px;
-          width: 72px;
-          height: 10px;
-          border-radius: 50%;
-          background: rgba(0, 0, 0, 0.28);
-          filter: blur(8px);
-          animation: imwl-shadow 3.2s ease-in-out infinite;
-        }
-
-        /* ---------- Texto ---------- */
-        .imwl-copy {
-          margin-top: 22px;
           display: flex;
           flex-direction: column;
           align-items: center;
-          gap: 6px;
+          gap: 10px;
+          padding: 28px 40px;
         }
 
-        .imwl-brand {
-          font-family: "Cormorant Garamond", "Playfair Display", Georgia, serif;
-          font-size: 1.6rem;
-          font-weight: 600;
-          letter-spacing: 0.32em;
-          padding-left: 0.32em; /* compensa el letter-spacing para centrar */
-          line-height: 1;
-          color: var(--imwl-text);
+        /* ---------- Glow ---------- */
+        .mlyl-glow {
+          position: absolute;
+          inset: 0;
+          border-radius: 50%;
+          background: radial-gradient(
+            ellipse at center,
+            color-mix(in srgb, var(--mlyl-color) 22%, transparent) 0%,
+            transparent 70%
+          );
+          filter: blur(24px);
+          animation: mlyl-breathe 3s ease-in-out infinite;
         }
 
-        .imwl-label {
-          font-size: 0.72rem;
-          letter-spacing: 0.14em;
-          color: var(--imwl-muted);
-        }
-
-        .imwl-bar {
+        /* ---------- Wordmark ---------- */
+        .mlyl-word {
           position: relative;
-          width: 108px;
+          margin: 0;
+          font-family: var(--font-heading-family, "Cormorant Garamond", "Playfair Display", Georgia, serif);
+          font-size: clamp(2.8rem, 9vw, 4.2rem);
+          font-weight: 600;
+          line-height: 1;
+          letter-spacing: 0.22em;
+          padding-left: 0.22em; /* compensa el letter-spacing para centrar */
+          color: var(--mlyl-color);
+          background: linear-gradient(
+            100deg,
+            var(--mlyl-color) 0%,
+            var(--mlyl-color) 38%,
+            var(--mlyl-shine) 50%,
+            var(--mlyl-color) 62%,
+            var(--mlyl-color) 100%
+          );
+          background-size: 250% 100%;
+          -webkit-background-clip: text;
+                  background-clip: text;
+          -webkit-text-fill-color: transparent;
+          animation: mlyl-shine 2.6s ease-in-out infinite;
+        }
+
+        /* ---------- STORE + líneas ---------- */
+        .mlyl-sub {
+          position: relative;
+          display: flex;
+          align-items: center;
+          gap: 14px;
+        }
+
+        .mlyl-store {
+          font-size: 0.8rem;
+          font-weight: 500;
+          letter-spacing: 0.5em;
+          padding-left: 0.5em;
+          color: var(--mlyl-color);
+        }
+
+        .mlyl-line {
+          display: block;
+          width: 54px;
+          height: 1px;
+          background: var(--mlyl-color);
+          opacity: 0.7;
+          animation: mlyl-line 2.6s ease-in-out infinite;
+        }
+        .mlyl-line-l { transform-origin: right center; }
+        .mlyl-line-r { transform-origin: left center; }
+
+        /* ---------- Texto ---------- */
+        .mlyl-label {
+          margin: 18px 0 0;
+          font-size: 0.85rem;
+          letter-spacing: 0.08em;
+          text-align: center;
+          color: var(--mlyl-muted);
+        }
+
+        .mlyl-dots span {
+          display: inline-block;
+          animation: mlyl-dot 1.4s ease-in-out infinite;
+        }
+        .mlyl-dots span:nth-child(2) { animation-delay: 0.2s; }
+        .mlyl-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+        /* ---------- Barra ---------- */
+        .mlyl-bar {
+          position: relative;
+          width: 132px;
           height: 2px;
-          margin-top: 8px;
+          margin-top: 14px;
           overflow: hidden;
           border-radius: 2px;
-          background: color-mix(in srgb, var(--imwl-text) 12%, transparent);
+          background: color-mix(in srgb, var(--mlyl-color) 16%, transparent);
         }
 
-        .imwl-bar-fill {
+        .mlyl-bar-fill {
           position: absolute;
           top: 0;
           left: 0;
           height: 100%;
           width: 42%;
           border-radius: 2px;
-          background: linear-gradient(90deg, transparent, var(--imwl-accent), transparent);
-          animation: imwl-slide 1.5s ease-in-out infinite;
+          background: linear-gradient(90deg, transparent, var(--mlyl-color), transparent);
+          animation: mlyl-slide 1.5s ease-in-out infinite;
         }
 
         /* ---------- Keyframes ---------- */
-        @keyframes imwl-spin {
-          to { transform: rotate(360deg); }
+        @keyframes mlyl-shine {
+          0%   { background-position: 130% 0; }
+          100% { background-position: -130% 0; }
         }
 
-        @keyframes imwl-float {
-          0%, 100% { transform: translateY(-4px) rotateY(-16deg) rotateX(3deg); }
-          50%      { transform: translateY(5px)  rotateY(16deg)  rotateX(-3deg); }
-        }
-
-        @keyframes imwl-shadow {
-          0%, 100% { transform: scaleX(0.82); opacity: 0.55; }
-          50%      { transform: scaleX(1.05); opacity: 0.9; }
-        }
-
-        @keyframes imwl-breathe {
+        @keyframes mlyl-breathe {
           0%, 100% { opacity: 0.55; transform: scale(0.95); }
           50%      { opacity: 1;    transform: scale(1.05); }
         }
 
-        @keyframes imwl-slide {
+        @keyframes mlyl-line {
+          0%, 100% { transform: scaleX(0.45); opacity: 0.4; }
+          50%      { transform: scaleX(1);    opacity: 0.9; }
+        }
+
+        @keyframes mlyl-dot {
+          0%, 80%, 100% { opacity: 0.25; transform: translateY(0); }
+          40%           { opacity: 1;    transform: translateY(-2px); }
+        }
+
+        @keyframes mlyl-slide {
           0%   { transform: translateX(-110%); }
           100% { transform: translateX(260%); }
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .imwl-ring-spin,
-          .imwl-ring-inner,
-          .imwl-logo,
-          .imwl-shadow,
-          .imwl-glow,
-          .imwl-bar-fill {
+          .mlyl-glow,
+          .mlyl-word,
+          .mlyl-line,
+          .mlyl-dots span,
+          .mlyl-bar-fill {
             animation-duration: 0.01ms;
             animation-iteration-count: 1;
           }
-          .imwl-bar-fill { transform: translateX(80%); }
+          .mlyl-word { background-position: 50% 0; }
+          .mlyl-bar-fill { transform: translateX(80%); }
         }
       `}</style>
     </div>

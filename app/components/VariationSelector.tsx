@@ -45,8 +45,8 @@ export default function VariationSelector({
               border whitespace-nowrap
               ${
                 selectedValue === option
-                  ? "dark:bg-yellow-500 dark:text-white dark:border-yellow-500 bg-yellow-400 text-black border-yellow-400 shadow-sm"
-                  : "bg-white border-slate-300 text-slate-900 hover:border-black/60 hover:shadow-sm"
+                  ? "bg-[var(--primary)] text-[var(--primaryForeground)] border-[var(--primary)] shadow-sm"
+                  : "bg-[var(--card)] border-[var(--border)] text-[var(--text)] hover:border-[var(--primary)] hover:shadow-sm"
               }
               ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}
             `}

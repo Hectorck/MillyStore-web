@@ -94,15 +94,22 @@ export default function FeaturedProductsSection({
 
   // Filtra productos válidos, ordena por fecha de creación (más nuevo primero) y limita a MAX_PRODUCTS
   const recentProducts = React.useMemo(() => {
-    return products
+    const filtered = products
       .filter((prod: any) => prod && prod.id)
       .sort((a: any, b: any) => getCreatedAtMillis(b) - getCreatedAtMillis(a))
       .slice(0, MAX_PRODUCTS);
-  }, [products]);
+    console.log("FeaturedProductsSection - recentProducts:", filtered.length, filtered);
+    console.log("FeaturedProductsSection - visibleCount:", visibleCount);
+    return filtered;
+  }, [products, visibleCount]);
 
   // Crear array extendido para carousel infinito (copia al principio y al final)
   const extendedProducts = React.useMemo(() => {
     if (recentProducts.length === 0) return [];
+    // Si hay menos productos que visibleCount, no usar carousel infinito
+    if (recentProducts.length <= visibleCount) {
+      return recentProducts;
+    }
     return [
       ...recentProducts.slice(-visibleCount),
       ...recentProducts,
@@ -110,7 +117,7 @@ export default function FeaturedProductsSection({
     ];
   }, [recentProducts, visibleCount]);
 
-  const maxIndex = extendedProducts.length - visibleCount;
+  const maxIndex = recentProducts.length <= visibleCount ? 0 : extendedProducts.length - visibleCount;
 
   const handlePrev = () => {
     setIsTransitioning(true);
@@ -162,9 +169,15 @@ export default function FeaturedProductsSection({
 
   // Resetear currentIndex cuando cambia visibleCount
   React.useEffect(() => {
-    setCurrentIndex(visibleCount);
+    // Si hay menos productos que visibleCount, no desplazar
+    if (recentProducts.length <= visibleCount) {
+      setCurrentIndex(0);
+    } else {
+      setCurrentIndex(visibleCount);
+    }
     setIsTransitioning(true);
-  }, [visibleCount]);
+    console.log("FeaturedProductsSection - visibleCount changed:", visibleCount, "currentIndex set to:", recentProducts.length <= visibleCount ? 0 : visibleCount);
+  }, [visibleCount, recentProducts.length]);
 
   // ── Return condicional DESPUÉS de todos los hooks ──
   if (loading) {

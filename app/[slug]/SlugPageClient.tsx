@@ -106,7 +106,9 @@ export default function SlugPageClient() {
       if ((!rel || rel.length === 0) && producto.categoria) {
         rel = await obtenerProductosPorCategoria(producto.categoria, producto.id, 10);
       }
-      setRelacionados(rel);
+      // Filtrar nuevamente para asegurar que el producto actual no aparezca
+      const filteredRel = rel.filter((p: any) => p.id !== producto.id);
+      setRelacionados(filteredRel);
     }
 
     fetchRelacionados();
@@ -524,15 +526,6 @@ function ProductDetailContent({ producto, relacionados, reviews, atributos }: { 
                 {inCart ? "Eliminar del carrito" : "Añadir al carrito"}
               </button>
             </div>
-
-            <button
-              onClick={() => window.location.href = '/por-que-comprar-un-decant-de-perfume-original'}
-              className="w-full bg-[var(--card)] border border-[var(--border)] py-3 px-6 rounded-xl font-semibold hover:bg-[var(--bgSecondary)] transition-colors flex items-center justify-center gap-2"
-              style={{ color: "var(--text)" }}
-            >
-              <span className="material-icons-round">info</span>
-              ¿Qué es un decant?
-            </button>
 
             {descItems.length > 0 && (
               <div>

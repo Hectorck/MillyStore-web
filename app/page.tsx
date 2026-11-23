@@ -59,12 +59,15 @@ export default function Home() {
         if ('requestIdleCallback' in window) {
           (window as any).requestIdleCallback(async () => {
             const products = await obtenerProductos({ incluirSinStock: true });
+            console.log("Productos cargados:", products?.length, products);
 
             // Get all products, sort by newest first, take top 40
             const recentProducts = (products || [])
               .filter((p: any) => p?.id)
               .sort((a: any, b: any) => (b.createdAt || 0) - (a.createdAt || 0))
               .slice(0, 40);
+
+            console.log("Productos recientes:", recentProducts?.length, recentProducts);
 
             if (mounted) {
               setFeaturedProductsResolved(recentProducts);
@@ -75,11 +78,14 @@ export default function Home() {
           // Fallback para navegadores que no soportan requestIdleCallback
           setTimeout(async () => {
             const products = await obtenerProductos({ incluirSinStock: true });
+            console.log("Productos cargados (fallback):", products?.length, products);
 
             const recentProducts = (products || [])
               .filter((p: any) => p?.id)
               .sort((a: any, b: any) => (b.createdAt || 0) - (a.createdAt || 0))
               .slice(0, 40);
+
+            console.log("Productos recientes (fallback):", recentProducts?.length, recentProducts);
 
             if (mounted) {
               setFeaturedProductsResolved(recentProducts);

@@ -361,33 +361,24 @@ return (
                             <span className="material-icons-round text-sm text-muted-foreground">chevron_right</span>
                           </button>
 
-                          {/* Submenú tipo */}
+                          {/* Submenú tipo - Categorías dinámicas */}
                           {catalogSubmenu === "tipo" && (
                             <div
-                              className="absolute left-full top-0 min-w-48 rounded-2xl border shadow-xl py-2 z-60"
+                              className="absolute left-full top-0 min-w-48 rounded-2xl border shadow-xl py-2 z-60 max-h-96 overflow-y-auto"
                               style={{
                                 background: "var(--card)",
                                 borderColor: "var(--border)",
                               }}
                             >
-                              <a
-                                href="/productos?cat=1792053390551"
-                                className="block px-4 py-3 text-sm text-card-foreground hover:bg-muted rounded-md transition-colors"
-                              >
-                                Mujer
-                              </a>
-                              <a
-                                href="/productos?cat=1792053354691"
-                                className="block px-4 py-3 text-sm text-card-foreground hover:bg-muted rounded-md transition-colors"
-                              >
-                                Hombre
-                              </a>
-                              <a
-                                href="/productos?cat=niños"
-                                className="block px-4 py-3 text-sm text-card-foreground hover:bg-muted rounded-md transition-colors"
-                              >
-                                Niños
-                              </a>
+                              {categorias.map((cat) => (
+                                <a
+                                  key={cat.id}
+                                  href={`/productos?cat=${cat.id}`}
+                                  className="block px-4 py-3 text-sm text-card-foreground hover:bg-muted rounded-md transition-colors"
+                                >
+                                  {cat.nombre}
+                                </a>
+                              ))}
                             </div>
                           )}
                         </div>
