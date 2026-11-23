@@ -185,8 +185,6 @@ export async function guardarCategoria(categoria) {
       setDoc(docRef, cleanUndefinedDeep(categoria)),
       timeoutPromise
     ]);
-
-    await docRef.set(categoria, { merge: true });
   } catch (error) {
     console.error("[guardarCategoria] Error al guardar categoría:", error);
     console.error("[guardarCategoria] Error message:", error.message);

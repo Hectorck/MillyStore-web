@@ -419,7 +419,7 @@ return (
                                 Mujer
                               </a>
                               <a
-                                href="/productos?genero=unisex"
+                                href="/productos?genero=niños"
                                 className="block px-4 py-3 text-sm text-card-foreground hover:bg-muted rounded-md transition-colors"
                               >
                                 Niños
@@ -1004,7 +1004,7 @@ return (
                                 Mujer
                               </a>
                               <a
-                                href="/productos?genero=unisex"
+                                href="/productos?genero=niños"
                                 className="block px-3 py-2 text-sm rounded-md transition-colors hover:bg-muted"
                                 style={{ color: "var(--foreground)" }}
                                 onClick={() => setMobileOpen(false)}

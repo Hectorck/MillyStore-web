@@ -47,7 +47,7 @@ export interface Producto {
   subsubcategoria?: string;
   marca?: string;
   bodegaId?: string;
-  genero?: "hombre" | "mujer" | "unisex";
+  genero?: "hombre" | "mujer" | "niños";
   destacado?: boolean;
   promocionar?: boolean;
   promocionarTitulo?: string;

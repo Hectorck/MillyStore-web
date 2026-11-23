@@ -20,7 +20,7 @@ export default function SearchResultsPage() {
   const searchParams = useSearchParams();
   const queryParam = searchParams?.get("query") || "";
   const categoriaId = (searchParams?.get("cat") || searchParams?.get("category") || "").trim();
-  const generoFromUrl = (searchParams?.get("genero") || "").trim() as "hombre" | "mujer" | "unisex" | "";
+  const generoFromUrl = (searchParams?.get("genero") || "").trim() as "hombre" | "mujer" | "niños" | "";
   const isLogger = useUser();
 
   const [productos, setProductos] = useState<any[]>([]);
@@ -33,7 +33,7 @@ export default function SearchResultsPage() {
   const [marca, setMarca] = useState("");
   const [marcas, setMarcas] = useState<(string | undefined)[]>([]);
   const [categorias, setCategorias] = useState<any[]>([]);
-  const [filterGenero, setFilterGenero] = useState<"hombre" | "mujer" | "unisex" | "">(generoFromUrl);
+  const [filterGenero, setFilterGenero] = useState<"hombre" | "mujer" | "niños" | "">(generoFromUrl);
   const categoriesScrollRef = useRef<HTMLDivElement>(null);
 
   // Sincronizar filtro de género desde URL
@@ -162,7 +162,7 @@ export default function SearchResultsPage() {
         <select
           value={filterGenero}
           onChange={(e) => {
-            const newGenero = e.target.value as "hombre" | "mujer" | "unisex" | "";
+            const newGenero = e.target.value as "hombre" | "mujer" | "niños" | "";
             setFilterGenero(newGenero);
             // Actualizar URL con el parámetro genero
             const params = new URLSearchParams(searchParams?.toString() || "");
@@ -179,7 +179,7 @@ export default function SearchResultsPage() {
           <option value="">Todos</option>
           <option value="hombre">Hombre</option>
           <option value="mujer">Mujer</option>
-          <option value="unisex">Unisex</option>
+          <option value="niños">Niños</option>
         </select>
       </div>
 

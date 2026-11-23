@@ -69,7 +69,7 @@ export default function ProductosPage() {
   const categoriaFromUrl = (searchParams?.get("cat") || searchParams?.get("category") || "").trim();
   const subcategoriaFromUrl = (searchParams?.get("subcat") || searchParams?.get("subcategory") || searchParams?.get("sub") || "").trim();
   const subsubcategoriaFromUrl = (searchParams?.get("subsubcat") || searchParams?.get("subsubcategory") || searchParams?.get("subsub") || "").trim();
-  const generoFromUrl = (searchParams?.get("genero") || "").trim() as "hombre" | "mujer" | "unisex" | "";
+  const generoFromUrl = (searchParams?.get("genero") || "").trim() as "hombre" | "mujer" | "niños" | "";
   const bodegaFromUrl = (searchParams?.get("bodega") || "").trim();
 
   // Estado local: responde al click al instante (router.push a veces no actualiza searchParams en la misma ruta)
@@ -113,7 +113,7 @@ export default function ProductosPage() {
   const [showPrecio, setShowPrecio] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [categorias, setCategorias] = useState<any[]>([]);
-  const [filterGenero, setFilterGenero] = useState<"hombre" | "mujer" | "unisex" | "">("");
+  const [filterGenero, setFilterGenero] = useState<"hombre" | "mujer" | "niños" | "">("");
   const categoriesScrollRef = useRef<HTMLDivElement>(null);
 
   // 1. Control de Montaje - Inicializa filtros desde URL
@@ -422,7 +422,7 @@ export default function ProductosPage() {
             <select
               value={filterGenero}
               onChange={(e) => {
-                const newGenero = e.target.value as "hombre" | "mujer" | "unisex" | "";
+                const newGenero = e.target.value as "hombre" | "mujer" | "niños" | "";
                 setFilterGenero(newGenero);
                 // Actualizar URL con el parámetro genero
                 const params = new URLSearchParams(searchParams?.toString() || "");
@@ -439,7 +439,7 @@ export default function ProductosPage() {
               <option value="">Todos</option>
               <option value="hombre">Hombre</option>
               <option value="mujer">Mujer</option>
-              <option value="unisex">Unisex</option>
+              <option value="niños">Niños</option>
             </select>
 
           </div>
